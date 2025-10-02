@@ -1,0 +1,6 @@
+@RateWatch.UserService_HostAddress = http://localhost:5041
+
+GET {{RateWatch.UserService_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
