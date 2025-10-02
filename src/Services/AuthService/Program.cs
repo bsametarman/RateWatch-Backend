@@ -1,11 +1,17 @@
 using Microsoft.EntityFrameworkCore;
-using RateWatch.UserService.Infrastructure.Data;
+using RateWatch.AuthService.Application.Services;
+using RateWatch.AuthService.Domain.Interfaces;
+using RateWatch.AuthService.Infrastructure.Data;
+using RateWatch.AuthService.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<UserContext>(options =>
+builder.Services.AddDbContext<AuthContext>(options =>
     options.UseNpgsql(connectionString));
+
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 
 builder.Services.AddControllers();
 
@@ -27,3 +33,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+

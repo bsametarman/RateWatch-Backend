@@ -5,17 +5,16 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{267B96B0-7D14-4662-AE66-46829A1F700E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RateWatch.UserService", "Services\UserService\RateWatch.UserService.csproj", "{33723B55-2C76-4064-87DF-695FA5D8A2EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RateWatch.UserService", "Services\UserService\RateWatch.UserService.csproj", "{33723B55-2C76-4064-87DF-695FA5D8A2EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RateWatch.AlertService", "Services\AlertService\RateWatch.AlertService.csproj", "{BC3323E3-54CD-4596-8C78-43C42005D69D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RateWatch.AlertService", "Services\AlertService\RateWatch.AlertService.csproj", "{BC3323E3-54CD-4596-8C78-43C42005D69D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RateWatch.AuthService", "Services\AuthService\RateWatch.AuthService.csproj", "{949E5C87-E056-4CBD-A85E-EAFC70AB475C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{33723B55-2C76-4064-87DF-695FA5D8A2EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -26,9 +25,20 @@ Global
 		{BC3323E3-54CD-4596-8C78-43C42005D69D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC3323E3-54CD-4596-8C78-43C42005D69D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC3323E3-54CD-4596-8C78-43C42005D69D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{949E5C87-E056-4CBD-A85E-EAFC70AB475C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{949E5C87-E056-4CBD-A85E-EAFC70AB475C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{949E5C87-E056-4CBD-A85E-EAFC70AB475C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{949E5C87-E056-4CBD-A85E-EAFC70AB475C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{33723B55-2C76-4064-87DF-695FA5D8A2EE} = {267B96B0-7D14-4662-AE66-46829A1F700E}
 		{BC3323E3-54CD-4596-8C78-43C42005D69D} = {267B96B0-7D14-4662-AE66-46829A1F700E}
+		{949E5C87-E056-4CBD-A85E-EAFC70AB475C} = {267B96B0-7D14-4662-AE66-46829A1F700E}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B21A40CA-8ED7-4ECC-848B-B3548851DF71}
 	EndGlobalSection
 EndGlobal
