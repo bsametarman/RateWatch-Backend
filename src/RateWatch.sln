@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RateWatch.AlertService", "S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RateWatch.AuthService", "Services\AuthService\RateWatch.AuthService.csproj", "{949E5C87-E056-4CBD-A85E-EAFC70AB475C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RateWatch.ApiGateway", "ApiGateway\RateWatch.ApiGateway.csproj", "{7ED0C5BD-76DA-4EC6-A3BF-DB37D9E094D6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{949E5C87-E056-4CBD-A85E-EAFC70AB475C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{949E5C87-E056-4CBD-A85E-EAFC70AB475C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{949E5C87-E056-4CBD-A85E-EAFC70AB475C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7ED0C5BD-76DA-4EC6-A3BF-DB37D9E094D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7ED0C5BD-76DA-4EC6-A3BF-DB37D9E094D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7ED0C5BD-76DA-4EC6-A3BF-DB37D9E094D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7ED0C5BD-76DA-4EC6-A3BF-DB37D9E094D6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

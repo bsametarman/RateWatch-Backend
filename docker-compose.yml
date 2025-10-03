@@ -25,6 +25,46 @@ services:
       - redis-data:/data
     restart: unless-stopped
 
+  # Microservices
+  authservice:
+    container_name: ratewatch_authservice
+    build:
+      context: ./src/Services/AuthService
+      dockerfile: Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__DefaultConnection=Host=postgres-db;Port=5432;Database=ratewatchdb;Username=admin;Password=secret
+      - AppSettings__Token=HelloThisIsMySuperSecretKeyYouCannotGuessWhatThisIsItMustBeLongTryingToMakeItLong
+    depends_on:
+      - postgres-db
+
+  userservice:
+    container_name: ratewatch_userservice
+    build:
+      context: ./src/Services/UserService
+      dockerfile: Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__DefaultConnection=Host=postgres-db;Port=5432;Database=ratewatchdb;Username=admin;Password=secret
+    depends_on:
+      - postgres-db
+  
+  apigateway:
+    container_name: ratewatch_apigateway
+    build:
+      context: ./src/ApiGateway
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+    depends_on:
+      - authservice
+      - userservice
+
 volumes:
   postgres-data:
   redis-data:
