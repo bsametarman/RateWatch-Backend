@@ -6,6 +6,6 @@
         public int AuthUserId { get; set; }
         public string Email { get; set; }
         public string Username { get; set; }
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     }
 }

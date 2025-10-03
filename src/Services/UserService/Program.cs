@@ -1,11 +1,17 @@
 using Microsoft.EntityFrameworkCore;
+using RateWatch.UserService.Application.Services;
+using RateWatch.UserService.Domain.Interfaces;
 using RateWatch.UserService.Infrastructure.Data;
+using RateWatch.UserService.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<UserContext>(options =>
     options.UseNpgsql(connectionString));
+
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 builder.Services.AddControllers();
 

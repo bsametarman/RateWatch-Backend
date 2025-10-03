@@ -9,6 +9,6 @@ namespace RateWatch.UserService.Infrastructure.Data
         {
         }
 
-        DbSet<User> Users { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }
