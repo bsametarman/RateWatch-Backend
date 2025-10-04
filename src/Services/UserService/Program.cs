@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using RateWatch.UserService.Application.Messaging;
 using RateWatch.UserService.Application.Services;
 using RateWatch.UserService.Domain.Interfaces;
 using RateWatch.UserService.Infrastructure.Data;
@@ -12,6 +13,7 @@ builder.Services.AddDbContext<UserContext>(options =>
 
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddHostedService<UserRegistrationConsumer>();
 
 builder.Services.AddControllers();
 

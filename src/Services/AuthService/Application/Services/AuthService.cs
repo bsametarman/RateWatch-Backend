@@ -13,11 +13,14 @@ namespace RateWatch.AuthService.Application.Services
     {
         private readonly IAuthRepository _authRepository;
         private readonly IConfiguration _configuration;
+        private readonly IMessageProducer _messageProducer;
 
-        public AuthService(IAuthRepository authRepository, IConfiguration configuration)
+        public AuthService(IAuthRepository authRepository, IConfiguration configuration, IMessageProducer messageProducer)
         {
             _authRepository = authRepository;
             _configuration = configuration;
+            _messageProducer = messageProducer;
+
         }
 
         public async Task<bool> RegisterAsync(UserForRegisterDto userForRegisterDto)
@@ -33,8 +36,23 @@ namespace RateWatch.AuthService.Application.Services
                 passwordSalt = passwordSalt,
             };
 
-            await _authRepository.AddUserAsync(user);
-            return true;
+            var newUser = await _authRepository.AddUserAsync(user);
+
+            if(newUser != null)
+            {
+                var userRegisteredEvent = new
+                {
+                    AuthUserId = newUser.Id,
+                    newUser.Email,
+                    Username = newUser.Email.Split('@')[0]
+                };
+                
+                await _messageProducer.ProduceAsync("user-registered-topic", userRegisteredEvent);
+
+                return true;
+            }
+
+            return false;
         }
 
         public async Task<string> LoginAsync(UserForLoginDto userForLoginDto)

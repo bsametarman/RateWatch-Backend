@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using RateWatch.AuthService.Application.Services;
 using RateWatch.AuthService.Domain.Interfaces;
 using RateWatch.AuthService.Infrastructure.Data;
+using RateWatch.AuthService.Infrastructure.Messaging;
 using RateWatch.AuthService.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,7 @@ builder.Services.AddDbContext<AuthContext>(options =>
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
+builder.Services.AddSingleton<IMessageProducer, KafkaProducer>();
 
 builder.Services.AddControllers();
 
