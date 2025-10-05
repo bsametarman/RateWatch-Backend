@@ -77,6 +77,21 @@ services:
     depends_on:
       - postgres-db
       - kafka
+    
+  alertservice:
+    container_name: ratewatch_alertservice
+    build:
+      context: ./src/Services/AlertService
+      dockerfile: Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__DefaultConnection=Host=postgres-db;Port=5432;Database=ratewatchdb;Username=admin;Password=secret
+      - Redis__ConnectionString=redis-cache:6379
+    depends_on:
+      - postgres-db
+      - kafka
+      - redis-cache
 
   ratefetcherservice:
     container_name: ratewatch_ratefetcher
