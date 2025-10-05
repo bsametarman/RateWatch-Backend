@@ -77,6 +77,18 @@ services:
     depends_on:
       - postgres-db
       - kafka
+
+  ratefetcherservice:
+    container_name: ratewatch_ratefetcher
+    build:
+      context: ./src/Services/RateFetcherService
+      dockerfile: Dockerfile
+    environment:
+      - DOTNET_ENVIRONMENT=Development
+      - ExchangeRateApi__ApiKey=87b92f3e214d2fada1c139d5
+    depends_on:
+      - kafka
+      - redis-cache
   
   apigateway:
     container_name: ratewatch_apigateway
