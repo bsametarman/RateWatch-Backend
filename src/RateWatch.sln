@@ -9,11 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RateWatch.UserService", "Se
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RateWatch.AlertService", "Services\AlertService\RateWatch.AlertService.csproj", "{BC3323E3-54CD-4596-8C78-43C42005D69D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RateWatch.AuthService", "Services\AuthService\RateWatch.AuthService.csproj", "{949E5C87-E056-4CBD-A85E-EAFC70AB475C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RateWatch.AuthService", "Services\AuthService\RateWatch.AuthService.csproj", "{949E5C87-E056-4CBD-A85E-EAFC70AB475C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RateWatch.ApiGateway", "ApiGateway\RateWatch.ApiGateway.csproj", "{7ED0C5BD-76DA-4EC6-A3BF-DB37D9E094D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RateWatch.ApiGateway", "ApiGateway\RateWatch.ApiGateway.csproj", "{7ED0C5BD-76DA-4EC6-A3BF-DB37D9E094D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RateWatch.RateFetcherService", "Services\RateFetcherService\RateWatch.RateFetcherService.csproj", "{5BF42C24-7FF9-43F6-B5F0-10509EC47234}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RateWatch.RateFetcherService", "Services\RateFetcherService\RateWatch.RateFetcherService.csproj", "{5BF42C24-7FF9-43F6-B5F0-10509EC47234}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RateWatch.ThresholdRuleService", "Services\ThresholdRuleService\RateWatch.ThresholdRuleService.csproj", "{AAFFBE16-1C4A-4145-A9BD-A9D2E6086760}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,10 @@ Global
 		{5BF42C24-7FF9-43F6-B5F0-10509EC47234}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5BF42C24-7FF9-43F6-B5F0-10509EC47234}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5BF42C24-7FF9-43F6-B5F0-10509EC47234}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAFFBE16-1C4A-4145-A9BD-A9D2E6086760}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAFFBE16-1C4A-4145-A9BD-A9D2E6086760}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAFFBE16-1C4A-4145-A9BD-A9D2E6086760}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAFFBE16-1C4A-4145-A9BD-A9D2E6086760}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,6 +56,7 @@ Global
 		{BC3323E3-54CD-4596-8C78-43C42005D69D} = {267B96B0-7D14-4662-AE66-46829A1F700E}
 		{949E5C87-E056-4CBD-A85E-EAFC70AB475C} = {267B96B0-7D14-4662-AE66-46829A1F700E}
 		{5BF42C24-7FF9-43F6-B5F0-10509EC47234} = {267B96B0-7D14-4662-AE66-46829A1F700E}
+		{AAFFBE16-1C4A-4145-A9BD-A9D2E6086760} = {267B96B0-7D14-4662-AE66-46829A1F700E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B21A40CA-8ED7-4ECC-848B-B3548851DF71}

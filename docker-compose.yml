@@ -104,6 +104,20 @@ services:
     depends_on:
       - kafka
       - redis-cache
+
+  thresholdruleservice:
+    container_name: ratwatch_thresholdrule
+    build:
+      context: ./src/Services/ThresholdRuleService
+      dockerfile: Dockerfile
+    environment:
+      - DOTNET_ENVIRONMENT=Development
+      - Kafka__BootstrapServers=kafka:29092
+      - Redis__ConnectionString=redis-cache:6379
+    depends_on:
+      - kafka
+      - redis-cache
+      - alertservice
   
   apigateway:
     container_name: ratewatch_apigateway
