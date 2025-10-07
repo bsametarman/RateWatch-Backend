@@ -50,6 +50,19 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
 
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:9.1.5
+    container_name: ratwatch_elasticsearch
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+
   # Microservices
   authservice:
     container_name: ratewatch_authservice
@@ -118,6 +131,19 @@ services:
       - kafka
       - redis-cache
       - alertservice
+
+  analyticsservice:
+    container_name: ratewatch_analytics
+    build:
+      context: ./src/Services/AnalyticsService
+      dockerfile: Dockerfile
+    environment:
+      - DOTNET_ENVIRONMENT=Development
+      - Elasticsearch__Uri=http://elasticsearch:9200
+      - Kafka__BootstrapServers=kafka:29092
+    depends_on:
+      - kafka
+      - elasticsearch
   
   apigateway:
     container_name: ratewatch_apigateway
@@ -136,3 +162,4 @@ services:
 volumes:
   postgres-data:
   redis-data:
+  elasticsearch-data:
