@@ -144,6 +144,19 @@ services:
     depends_on:
       - kafka
       - elasticsearch
+
+  dashboardservice:
+    container_name: ratewatch_dashboard
+    build:
+      context: ./src/Services/DashboardService
+      dockerfile: Dockerfile
+    environment:
+      - DOTNET_ENVIRONMENT=Development
+      - Elasticsearch__Uri=http://elasticsearch:9200
+      - Redis__ConnectionString=redis-cache:6379
+    depends_on:
+      - redis-cache
+      - elasticsearch
   
   apigateway:
     container_name: ratewatch_apigateway
@@ -158,6 +171,7 @@ services:
     depends_on:
       - authservice
       - userservice
+      - dashboardservice
 
 volumes:
   postgres-data:

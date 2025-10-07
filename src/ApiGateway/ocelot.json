@@ -110,6 +110,31 @@
           "Port": 8080
         }
       ]
+    },
+    // --- DashboardService ---
+    {
+      "UpstreamPathTemplate": "/gateway/dashboard/latest-rates",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/api/dashboard/latest-rates",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "dashboardservice",
+          "Port": 8080
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/dashboard/historical-rates/{currencyPair}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/api/dashboard/historical-rates/{currencyPair}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "dashboardservice",
+          "Port": 8080
+        }
+      ]
     }
   ],
   "GlobalConfiguration": {

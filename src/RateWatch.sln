@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RateWatch.ThresholdRuleServ
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RateWatch.AnalyticsService", "Services\AnalyticsService\RateWatch.AnalyticsService.csproj", "{3340A97A-C94D-4AD9-956A-A72E565E871B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RateWatch.DashboardService", "Services\DashboardService\RateWatch.DashboardService.csproj", "{D210BD06-2650-4E16-837E-337566F33719}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{3340A97A-C94D-4AD9-956A-A72E565E871B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3340A97A-C94D-4AD9-956A-A72E565E871B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3340A97A-C94D-4AD9-956A-A72E565E871B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D210BD06-2650-4E16-837E-337566F33719}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D210BD06-2650-4E16-837E-337566F33719}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D210BD06-2650-4E16-837E-337566F33719}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D210BD06-2650-4E16-837E-337566F33719}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,6 +70,7 @@ Global
 		{5BF42C24-7FF9-43F6-B5F0-10509EC47234} = {267B96B0-7D14-4662-AE66-46829A1F700E}
 		{AAFFBE16-1C4A-4145-A9BD-A9D2E6086760} = {267B96B0-7D14-4662-AE66-46829A1F700E}
 		{3340A97A-C94D-4AD9-956A-A72E565E871B} = {267B96B0-7D14-4662-AE66-46829A1F700E}
+		{D210BD06-2650-4E16-837E-337566F33719} = {267B96B0-7D14-4662-AE66-46829A1F700E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B21A40CA-8ED7-4ECC-848B-B3548851DF71}
