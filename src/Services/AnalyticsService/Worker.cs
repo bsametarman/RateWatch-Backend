@@ -1,7 +1,7 @@
 using Confluent.Kafka;
 using Nest;
+using RateWatch.AnalyticsService.Domain.Entities;
 using System.Text.Json;
-using System.Text.Json.Nodes;
 
 namespace RateWatch.AnalyticsService;
 
@@ -58,7 +58,8 @@ public class Worker : BackgroundService
 
     private async Task ProcessResult(string message)
     {
-        var rateDocument = JsonSerializer.Deserialize<JsonElement>(message);
+        var rateDocument = JsonSerializer.Deserialize<ExchangeRateData>(message);
+
         var rateDocumentWithTimeStamp = new
         {
             timeStamp = DateTime.UtcNow,
