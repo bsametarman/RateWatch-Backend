@@ -54,7 +54,8 @@ namespace RateWatch.DashboardService.API.Controllers
                 return BadRequest("Currency format is like EUR-USD");
             }
 
-            var targetCurrency = currencies[1];
+            var baseCurrency = currencies[0].ToUpper();
+            var targetCurrency = currencies[1].ToUpper();
 
             var searchResponse = await _elasticClient.SearchAsync<ExchangeRateDocument>(s => s
                 .Index(_configuration["Elasticsearch:DefaultIndex"])
@@ -77,10 +78,25 @@ namespace RateWatch.DashboardService.API.Controllers
             }
 
             var historicalData = searchResponse.Documents
-                .Select(doc => new
+                .Select(doc =>
                 {
-                    doc.TimeStamp,
-                    Rate = doc.Rates.ConversionRates.TryGetValue(targetCurrency, out var rate) ? rate : 0
+                    var rates = doc.Rates.ConversionRates;
+
+                    rates.TryGetValue(baseCurrency, out var baseRateInUsd);
+                    rates.TryGetValue(targetCurrency, out var targetRateInUsd);
+
+                    if (baseRateInUsd == 0 || targetRateInUsd == 0)
+                    {
+                        return null;
+                    }
+
+                    var crossRate = targetRateInUsd / baseRateInUsd;
+
+                    return new
+                    {
+                        doc.TimeStamp,
+                        Rate = Math.Round(crossRate, 6)
+                    };
                 })
                 .Where(x => x.Rate > 0)
                 .OrderBy(x => x.TimeStamp)
