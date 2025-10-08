@@ -1,15 +1,35 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using RateWatch.AuthService.Application.Services;
 using RateWatch.AuthService.Domain.Interfaces;
 using RateWatch.AuthService.Infrastructure.Data;
 using RateWatch.AuthService.Infrastructure.Messaging;
 using RateWatch.AuthService.Infrastructure.Repositories;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<AuthContext>(options =>
     options.UseNpgsql(connectionString));
+
+var appSettingsToken = builder.Configuration.GetSection("AppSettings:Token").Value;
+if (string.IsNullOrEmpty(appSettingsToken))
+    throw new Exception("AppSettings Token is not configured.");
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(appSettingsToken)),
+            ValidateIssuer = false,
+            ValidateAudience = false
+        };
+    });
+builder.Services.AddAuthorization();
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
@@ -30,7 +50,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
+app.UseAuthorization();
 app.UseAuthorization();
 app.MapControllers();
 

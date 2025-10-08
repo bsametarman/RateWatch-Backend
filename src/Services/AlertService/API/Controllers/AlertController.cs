@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using RateWatch.AlertService.Application.DTOs;
 using RateWatch.AlertService.Application.Services;
+using System.Security.Claims;
 
 namespace RateWatch.AlertService.API.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class AlertController : Controller
@@ -16,6 +19,7 @@ namespace RateWatch.AlertService.API.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<AlertDto?>> GetAlertById(int id)
         {
             var alert = await _alertService.GetAlertByIdAsync(id);
@@ -28,9 +32,15 @@ namespace RateWatch.AlertService.API.Controllers
         }
 
         [HttpGet("api/Alert/user-id/{userId}")]
-        public async Task<ActionResult<AlertDto?>> GetAlertByUserId(int userId)
+        public async Task<ActionResult<AlertDto?>> GetAlertByUserId()
         {
-            var alert = await _alertService.GetAlertByIdAsync(userId);
+            var userId = GetUserIdFromToken();
+            if (userId == null)
+            {
+                return Unauthorized();
+            }
+
+            var alert = await _alertService.GetAlertByUserIdAsync(userId.Value);
 
             if (alert != null)
             {
@@ -42,7 +52,13 @@ namespace RateWatch.AlertService.API.Controllers
         [HttpPost]
         public async Task<ActionResult<AlertDto>> AddAlert(AlertForCreationDto alertForCreationDto)
         {
-            var alert = await _alertService.AddAlertAsync(alertForCreationDto);
+            var userId = GetUserIdFromToken();
+            if (userId == null)
+            {
+                return Unauthorized();
+            }
+
+            var alert = await _alertService.AddAlertAsync(alertForCreationDto with { UserId = userId.Value });
             return Ok(alert);
         }
 
@@ -58,6 +74,11 @@ namespace RateWatch.AlertService.API.Controllers
         {
             await _alertService.DeleteAlertAsync(id);
             return NoContent();
+        }
+        private int? GetUserIdFromToken()
+        {
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            return int.TryParse(userIdClaim, out var userId) ? userId : null;
         }
     }
 }

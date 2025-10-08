@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using RateWatch.UserService.Application.DTOs;
 using RateWatch.UserService.Application.Services;
+using System.Security.Claims;
 
 namespace RateWatch.UserService.API.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class UserController : Controller
@@ -16,6 +19,7 @@ namespace RateWatch.UserService.API.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<IEnumerable<UserDto>>> GetUsers()
         {
             var users = await _userService.GetAllUsersAsync();
@@ -48,6 +52,7 @@ namespace RateWatch.UserService.API.Controllers
         }
 
         [HttpPost("internal/create")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<UserDto>> CreateUserForTestKafka(UserForCreationDto userForCreationDto)
         {
             var newUser = await _userService.CreateUserFromEventAsync(userForCreationDto);

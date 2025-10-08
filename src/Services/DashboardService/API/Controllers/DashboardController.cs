@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Nest;
 using RateWatch.DashboardService.Domain.Entities;
 using StackExchange.Redis;
+using System.Security.Claims;
 
 namespace RateWatch.DashboardService.API.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class DashboardController : Controller
