@@ -34,6 +34,7 @@ namespace RateWatch.AuthService.Application.Services
                 Email = userForRegisterDto.Email,
                 passwordHash = passwordHash,
                 passwordSalt = passwordSalt,
+                Role = "User"
             };
 
             var newUser = await _authRepository.AddUserAsync(user);
@@ -84,6 +85,7 @@ namespace RateWatch.AuthService.Application.Services
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.Role, user.Role),
             };
 
             var appSettingsToken = _configuration.GetSection("AppSettings:Token").Value;
