@@ -6,7 +6,20 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// --- JWT ---
+var AllowCrossOrigins = "_allowCrossOrigins";
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: AllowCrossOrigins,
+                      policy =>
+                      {
+                          policy.WithOrigins("http://localhost:5173")
+                                .AllowAnyHeader()
+                                .AllowAnyMethod();
+                      });
+});
+
+
 var appSettingsToken = builder.Configuration.GetSection("AppSettings:Token").Value;
 if (string.IsNullOrEmpty(appSettingsToken))
     throw new Exception("AppSettings Token is not configured.");
@@ -18,8 +31,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         {
             ValidateIssuerSigningKey = true,
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(appSettingsToken)),
-            ValidateIssuer = false, // Development
-            ValidateAudience = false // Development
+            ValidateIssuer = false,
+            ValidateAudience = false
         };
     });
 
@@ -28,6 +41,7 @@ builder.Services.AddOcelot(builder.Configuration);
 
 var app = builder.Build();
 
+app.UseCors(AllowCrossOrigins);
 app.UseAuthentication();
 await app.UseOcelot();
 
