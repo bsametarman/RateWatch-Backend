@@ -135,6 +135,18 @@
           "Port": 8080
         }
       ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/dashboard/historical-rates-daily/{currencyPair}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/api/dashboard/historical-rates-daily/{currencyPair}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "dashboardservice",
+          "Port": 8080
+        }
+      ]
     }
   ],
   "GlobalConfiguration": {
