@@ -34,7 +34,7 @@ namespace RateWatch.AlertService.Application.Services
             var alertJson = JsonSerializer.Serialize(newAlert);
             await _redisDb.HashSetAsync(ActivateAlertsRedisKey, newAlert.Id.ToString(), alertJson);
 
-            return new AlertDto(newAlert.Id, newAlert.UserId, newAlert.BaseCurrency, newAlert.TargetCurrency, newAlert.Condition.ToString(), newAlert.Treshold, newAlert.IsActive);
+            return new AlertDto(newAlert.Id, newAlert.UserId, newAlert.BaseCurrency, newAlert.TargetCurrency, newAlert.Condition.ToString(), newAlert.Treshold, newAlert.IsTriggered, newAlert.IsActive);
         }
 
         public async Task DeleteAlertAsync(int id)
@@ -49,19 +49,33 @@ namespace RateWatch.AlertService.Application.Services
             var alert = await _alertRepository.GetAlertByIdAsync(id);
             if (alert != null)
             {
-                return new AlertDto(alert.Id, alert.UserId, alert.BaseCurrency.ToUpper(), alert.TargetCurrency.ToUpper(), alert.Condition.ToString(), alert.Treshold, alert.IsActive);
+                return new AlertDto(alert.Id, alert.UserId, alert.BaseCurrency.ToUpper(), alert.TargetCurrency.ToUpper(), alert.Condition.ToString(), alert.Treshold, alert.IsTriggered, alert.IsActive);
             }
             return null;
         }
 
-        public async Task<AlertDto?> GetAlertByUserIdAsync(int userId)
+        public async Task<List<AlertDto>> GetAlertsByUserIdAsync(int userId)
         {
-            var alert = await _alertRepository.GetAlertByUserIdAsync(userId);
-            if (alert != null)
+            var alerts = await _alertRepository.GetAlertsByUserIdAsync(userId);
+            Console.WriteLine("service");
+            Console.WriteLine(alerts);
+            if (alerts == null || !alerts.Any())
             {
-                return new AlertDto(alert.Id, alert.UserId, alert.BaseCurrency.ToUpper(), alert.TargetCurrency.ToUpper(), alert.Condition.ToString(), alert.Treshold, alert.IsActive);
+                return new List<AlertDto>();
             }
-            return null;
+
+            var alertDtos = alerts.Select(alert => new AlertDto(
+                alert.Id,
+                alert.UserId,
+                alert.BaseCurrency.ToUpper(),
+                alert.TargetCurrency.ToUpper(),
+                alert.Condition.ToString(),
+                alert.Treshold,
+                alert.IsTriggered,
+                alert.IsActive
+            )).ToList();
+
+            return alertDtos;
         }
 
         public async Task UpdateAlertAsync(int id, AlertForUpdateDto alertForUpdateDto)

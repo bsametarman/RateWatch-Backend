@@ -7,6 +7,7 @@
         string TargetCurrency,
         string Condition,
         decimal Threshold,
+        bool IsTriggered,
         bool IsActive
     );
 }

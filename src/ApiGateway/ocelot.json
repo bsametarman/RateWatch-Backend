@@ -100,9 +100,9 @@
       ]
     },
     {
-      "UpstreamPathTemplate": "/gateway/alert/user-id/{id}",
+      "UpstreamPathTemplate": "/gateway/alert/user-alerts",
       "UpstreamHttpMethod": [ "Get" ],
-      "DownstreamPathTemplate": "/api/alert/user-id/{id}",
+      "DownstreamPathTemplate": "/api/alert/user-alerts",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {

@@ -31,8 +31,8 @@ namespace RateWatch.AlertService.API.Controllers
             return NoContent();
         }
 
-        [HttpGet("api/Alert/user-id/{userId}")]
-        public async Task<ActionResult<AlertDto?>> GetAlertByUserId()
+        [HttpGet("user-alerts")]
+        public async Task<ActionResult<List<AlertDto>>> GetAlertsByUserId()
         {
             var userId = GetUserIdFromToken();
             if (userId == null)
@@ -40,13 +40,11 @@ namespace RateWatch.AlertService.API.Controllers
                 return Unauthorized();
             }
 
-            var alert = await _alertService.GetAlertByUserIdAsync(userId.Value);
+            var alerts = await _alertService.GetAlertsByUserIdAsync(userId.Value);
+            Console.WriteLine("controller");
+            Console.WriteLine(alerts);
 
-            if (alert != null)
-            {
-                return Ok(alert);
-            }
-            return NoContent();
+            return alerts;
         }
 
         [HttpPost]

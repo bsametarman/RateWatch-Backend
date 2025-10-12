@@ -36,9 +36,12 @@ namespace RateWatch.AlertService.Infrastructure.Repositories
             return await _context.Alerts.FindAsync(id);
         }
 
-        public async Task<Alert?> GetAlertByUserIdAsync(int userId)
+        public async Task<List<Alert>> GetAlertsByUserIdAsync(int userId)
         {
-            return await _context.Alerts.FirstOrDefaultAsync(alert => alert.UserId == userId);
+            var alerts = await _context.Alerts.Where(alert => alert.UserId == userId).ToListAsync();
+            Console.WriteLine("repository");
+            Console.WriteLine(alerts);
+            return alerts;
         }
 
         public async Task UpdateAlertAsync(Alert alert)
