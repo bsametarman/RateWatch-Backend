@@ -157,6 +157,20 @@ services:
     depends_on:
       - redis-cache
       - elasticsearch
+
+  notificationservice:
+    container_name: ratewatch_notification
+    build:
+      context: ./src/Services/NotificationService
+      dockerfile: Dockerfile
+    ports:
+      - "8085:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - Kafka__BootstrapServers=kafka:29092
+    depends_on:
+      - kafka
   
   apigateway:
     container_name: ratewatch_apigateway
