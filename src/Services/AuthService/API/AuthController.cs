@@ -20,25 +20,25 @@ namespace RateWatch.AuthService.API
         {
             var result = await _authService.RegisterAsync(userForRegisterDto);
 
-            if(!result)
+            if(!result.Success)
             {
-                return BadRequest("Email already exists.");
+                return BadRequest(result);
             }
 
-            return Ok("User registered successfully!");
+            return Ok(result);
         }
 
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
         {
-            var token = await _authService.LoginAsync(userForLoginDto);
+            var response = await _authService.LoginAsync(userForLoginDto);
 
-            if(string.IsNullOrEmpty(token))
+            if(string.IsNullOrEmpty(response.Data))
             {
-                return Unauthorized("Invalid credentials");
+                return Unauthorized(response);
             }
 
-            return Ok(new {Token = token});
+            return Ok(response);
         }
     }
 }

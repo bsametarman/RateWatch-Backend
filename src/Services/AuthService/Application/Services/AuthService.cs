@@ -1,5 +1,6 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using RateWatch.AuthService.Application.DTOs;
+using RateWatch.AuthService.Application.Responses;
 using RateWatch.AuthService.Domain.Entities;
 using RateWatch.AuthService.Domain.Interfaces;
 using System.IdentityModel.Tokens.Jwt;
@@ -23,9 +24,12 @@ namespace RateWatch.AuthService.Application.Services
 
         }
 
-        public async Task<bool> RegisterAsync(UserForRegisterDto userForRegisterDto)
+        public async Task<ApiResponse> RegisterAsync(UserForRegisterDto userForRegisterDto)
         {
-            if(await _authRepository.UserExistsAsync(userForRegisterDto.Email)) { return false; }
+            if (await _authRepository.UserExistsAsync(userForRegisterDto.Email))
+            {
+                return ApiResponse.FailResponse(message: "User already exists.");
+            }
 
             CreatePasswordHash(userForRegisterDto.Password, out byte[] passwordHash, out byte[] passwordSalt);
 
@@ -50,19 +54,21 @@ namespace RateWatch.AuthService.Application.Services
                 
                 await _messageProducer.ProduceAsync("user-registered-topic", userRegisteredEvent);
 
-                return true;
+                return ApiResponse.SuccessResponse(message: "Registered successfuly.");
             }
 
-            return false;
+            return ApiResponse.FailResponse();
         }
 
-        public async Task<string> LoginAsync(UserForLoginDto userForLoginDto)
+        public async Task<ApiDataResponse<string>> LoginAsync(UserForLoginDto userForLoginDto)
         {
             var user = await _authRepository.GetUserByEmailAsync(userForLoginDto.email);
             if(user == null || !VerifyPasswordHash(userForLoginDto.password, user.passwordHash, user.passwordSalt)) {
-                return "Wrong credentials.";            
+                return ApiDataResponse<string>.FailWithMessage(data: "", message: "Wrong credentials.");
             }
-            return CreateToken(user);
+            var token = CreateToken(user);
+
+            return ApiDataResponse<string>.SuccessResponse(token);
         }
 
         private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
