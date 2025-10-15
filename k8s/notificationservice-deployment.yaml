@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notificationservice-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: notificationservice
+  template:
+    metadata:
+      labels:
+        app: notificationservice
+    spec:
+      containers:
+      - name: notificationservice
+        image: ghcr.io/bsametarman/ratewatch-notificationservice:latest
+        ports:
+        - containerPort: 80
+        env:
+        - name: ASPNETCORE_URLS
+          value: "http://+:80"
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "Production"
+        - name: Kafka__BootstrapServers
+          value: "kafka-service:9092"
+        - name: Kafka__GroupId
+          value: "notification-consumer-group"
+        - name: Kafka__AlertTriggeredTopic
+          value: "alert-triggered-topic"

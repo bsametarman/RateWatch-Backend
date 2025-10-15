@@ -1,0 +1,181 @@
+{
+    "Routes": [
+        {
+            "UpstreamPathTemplate": "/gateway/auth/register",
+            "UpstreamHttpMethod": [
+                "Post"
+            ],
+            "DownstreamPathTemplate": "/api/auth/register",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "authservice-service",
+                    "Port": 80
+                }
+            ]
+        },
+        {
+            "UpstreamPathTemplate": "/gateway/auth/login",
+            "UpstreamHttpMethod": [
+                "Post"
+            ],
+            "DownstreamPathTemplate": "/api/auth/login",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "authservice-service",
+                    "Port": 80
+                }
+            ]
+        },
+        {
+            "UpstreamPathTemplate": "/gateway/user",
+            "UpstreamHttpMethod": [
+                "Get"
+            ],
+            "DownstreamPathTemplate": "/api/user",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "userservice-service",
+                    "Port": 80
+                }
+            ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
+        },
+        {
+            "UpstreamPathTemplate": "/gateway/user/{id}",
+            "UpstreamHttpMethod": [
+                "Get",
+                "Put",
+                "Delete"
+            ],
+            "DownstreamPathTemplate": "/api/user/{id}",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "userservice-service",
+                    "Port": 80
+                }
+            ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
+        },
+        {
+            "UpstreamPathTemplate": "/gateway/user/internal/create",
+            "UpstreamHttpMethod": [
+                "Post"
+            ],
+            "DownstreamPathTemplate": "/api/user/internal/create",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "userservice-service",
+                    "Port": 80
+                }
+            ],
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "Bearer",
+                "AllowedScopes": []
+            }
+        },
+        {
+            "UpstreamPathTemplate": "/gateway/alert",
+            "UpstreamHttpMethod": [
+                "Post"
+            ],
+            "DownstreamPathTemplate": "/api/alert",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "alertservice-service",
+                    "Port": 80
+                }
+            ]
+        },
+        {
+            "UpstreamPathTemplate": "/gateway/alert/{id}",
+            "UpstreamHttpMethod": [
+                "Get",
+                "Put",
+                "Delete"
+            ],
+            "DownstreamPathTemplate": "/api/alert/{id}",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "alertservice-service",
+                    "Port": 80
+                }
+            ]
+        },
+        {
+            "UpstreamPathTemplate": "/gateway/alert/user-alerts",
+            "UpstreamHttpMethod": [
+                "Get"
+            ],
+            "DownstreamPathTemplate": "/api/alert/user-alerts",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "alertservice-service",
+                    "Port": 80
+                }
+            ]
+        },
+        {
+            "UpstreamPathTemplate": "/gateway/dashboard/latest-rates",
+            "UpstreamHttpMethod": [
+                "Get"
+            ],
+            "DownstreamPathTemplate": "/api/dashboard/latest-rates",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "dashboardservice-service",
+                    "Port": 80
+                }
+            ]
+        },
+        {
+            "UpstreamPathTemplate": "/gateway/dashboard/historical-rates/{currencyPair}",
+            "UpstreamHttpMethod": [
+                "Get"
+            ],
+            "DownstreamPathTemplate": "/api/dashboard/historical-rates/{currencyPair}",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "dashboardservice-service",
+                    "Port": 80
+                }
+            ]
+        },
+        {
+            "UpstreamPathTemplate": "/gateway/dashboard/historical-rates-daily/{currencyPair}",
+            "UpstreamHttpMethod": [
+                "Get"
+            ],
+            "DownstreamPathTemplate": "/api/dashboard/historical-rates-daily/{currencyPair}",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "dashboardservice-service",
+                    "Port": 80
+                }
+            ]
+        }
+    ],
+    "GlobalConfiguration": {
+        "BaseUrl": "http://localhost:8000",
+        "AuthenticationOptions": {
+            "AuthenticationProviderKey": "Bearer",
+            "Scheme": "Bearer"
+        }
+    }
+}

@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apigateway-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: apigateway
+  template:
+    metadata:
+      labels:
+        app: apigateway
+    spec:
+      containers:
+      - name: apigateway
+        image: ghcr.io/bsametarman/ratewatch-apigateway:latest
+        ports:
+        - containerPort: 80
+        env:
+        - name: ASPNETCORE_URLS
+          value: "http://+:80"
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "Production"
+        - name: AppSettings__Token
+          valueFrom:
+            secretKeyRef:
+              name: ratewatch-secrets
+              key: JWT_TOKEN_KEY

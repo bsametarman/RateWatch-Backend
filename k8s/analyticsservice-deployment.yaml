@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: analyticsservice-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: analyticsservice
+  template:
+    metadata:
+      labels:
+        app: analyticsservice
+    spec:
+      containers:
+      - name: analyticsservice
+        image: ghcr.io/bsametarman/ratewatch-analyticsservice:latest
+        ports:
+        - containerPort: 80
+        env:
+        - name: ASPNETCORE_URLS
+          value: "http://+:80"
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "Production"
+        - name: Elasticsearch__Uri
+          value: "http://elasticsearch-service:9200"
+        - name: Kafka__BootstrapServers
+          value: "kafka-service:9092"
+        - name: Kafka__GroupId
+          value: "analytics-consumer-group"
+        - name: Kafka__RatesUpdatedTopic
+          value: "rates-updated-topic"

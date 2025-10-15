@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: userservice-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: userservice
+  template:
+    metadata:
+      labels:
+        app: userservice
+    spec:
+      containers:
+      - name: userservice
+        image: ghcr.io/bsametarman/ratewatch-userservice:latest
+        ports:
+        - containerPort: 80
+        env:
+        - name: ASPNETCORE_URLS
+          value: "http://+:80"
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "Production"
+        - name: ConnectionStrings__DefaultConnection
+          valueFrom:
+            secretKeyRef:
+              name: ratewatch-secrets
+              key: DB_CONNECTION_STRING
+        - name: AppSettings__Token
+          valueFrom:
+            secretKeyRef:
+              name: ratewatch-secrets
+              key: JWT_TOKEN_KEY
+        - name: Kafka__BootstrapServers
+          value: "kafka-service:9092"
+        - name: Kafka__GroupId
+          value: "user-profile-consumer-group"

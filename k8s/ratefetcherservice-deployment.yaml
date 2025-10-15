@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ratefetcherservice-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ratefetcherservice
+  template:
+    metadata:
+      labels:
+        app: ratefetcherservice
+    spec:
+      containers:
+      - name: ratefetcherservice
+        image: ghcr.io/bsametarman/ratewatch-ratefetcherservice:latest
+        ports:
+        - containerPort: 80
+        env:
+        - name: ASPNETCORE_URLS
+          value: "http://+:80"
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "Production"
+        - name: Kafka__BootstrapServers
+          value: "kafka-service:9092"
+        - name: Redis__ConnectionString
+          value: "redis-cache-service:6379"
+        - name: ExchangeRateApi__BaseUrl
+          value: "https://v6.exchangerate-api.com/v6/"
+        - name: ExchangeRateApi__ApiKey
+          valueFrom:
+            secretKeyRef:
+              name: ratewatch-secrets
+              key: EXCHANGE_RATE_API_KEY
+        - name: ExchangeRateApi__BaseCurrency
+          value: "USD"
+        - name: WorkerSettings__FetchIntervalInSeconds
+          value: 1800

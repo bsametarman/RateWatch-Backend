@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dashboardservice-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dashboardservice
+  template:
+    metadata:
+      labels:
+        app: dashboardservice
+    spec:
+      containers:
+      - name: dashboardservice
+        image: ghcr.io/bsametarman/ratewatch-dashboardservice:latest
+        ports:
+        - containerPort: 80
+        env:
+        - name: ASPNETCORE_URLS
+          value: "http://+:80"
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "Production"
+        - name: AppSettings__Token
+          valueFrom:
+            secretKeyRef:
+              name: ratewatch-secrets
+              key: JWT_TOKEN_KEY
+        - name: Redis__ConnectionString
+          value: "redis-cache-service:6379"
+        - name: Redis__LatestRatestKey
+          value: "latest_rates"
+        - name: Elasticsearch__Uri
+          value: "http://elasticsearch-service:9200"
+        - name: Elasticsearch__DefaultIndex
+          value: "exchange-rates"

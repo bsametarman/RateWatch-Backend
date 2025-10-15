@@ -3,7 +3,9 @@
     // --- AuthService ---
     {
       "UpstreamPathTemplate": "/gateway/auth/register",
-      "UpstreamHttpMethod": [ "Post" ],
+      "UpstreamHttpMethod": [
+        "Post"
+      ],
       "DownstreamPathTemplate": "/api/auth/register",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -15,7 +17,9 @@
     },
     {
       "UpstreamPathTemplate": "/gateway/auth/login",
-      "UpstreamHttpMethod": [ "Post" ],
+      "UpstreamHttpMethod": [
+        "Post"
+      ],
       "DownstreamPathTemplate": "/api/auth/login",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -28,7 +32,9 @@
     // --- UserService ---
     {
       "UpstreamPathTemplate": "/gateway/user",
-      "UpstreamHttpMethod": [ "Get" ],
+      "UpstreamHttpMethod": [
+        "Get"
+      ],
       "DownstreamPathTemplate": "/api/user",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -44,7 +50,11 @@
     },
     {
       "UpstreamPathTemplate": "/gateway/user/{id}",
-      "UpstreamHttpMethod": [ "Get", "Put", "Delete" ],
+      "UpstreamHttpMethod": [
+        "Get",
+        "Put",
+        "Delete"
+      ],
       "DownstreamPathTemplate": "/api/user/{id}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -60,7 +70,9 @@
     },
     {
       "UpstreamPathTemplate": "/gateway/user/internal/create",
-      "UpstreamHttpMethod": [ "Post" ],
+      "UpstreamHttpMethod": [
+        "Post"
+      ],
       "DownstreamPathTemplate": "/api/user/internal/create",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -77,7 +89,9 @@
     // --- AlertService ---
     {
       "UpstreamPathTemplate": "/gateway/alert",
-      "UpstreamHttpMethod": [ "Post" ],
+      "UpstreamHttpMethod": [
+        "Post"
+      ],
       "DownstreamPathTemplate": "/api/alert",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -89,7 +103,11 @@
     },
     {
       "UpstreamPathTemplate": "/gateway/alert/{id}",
-      "UpstreamHttpMethod": [ "Get", "Put", "Delete" ],
+      "UpstreamHttpMethod": [
+        "Get",
+        "Put",
+        "Delete"
+      ],
       "DownstreamPathTemplate": "/api/alert/{id}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -101,7 +119,9 @@
     },
     {
       "UpstreamPathTemplate": "/gateway/alert/user-alerts",
-      "UpstreamHttpMethod": [ "Get" ],
+      "UpstreamHttpMethod": [
+        "Get"
+      ],
       "DownstreamPathTemplate": "/api/alert/user-alerts",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -114,7 +134,9 @@
     // --- DashboardService ---
     {
       "UpstreamPathTemplate": "/gateway/dashboard/latest-rates",
-      "UpstreamHttpMethod": [ "Get" ],
+      "UpstreamHttpMethod": [
+        "Get"
+      ],
       "DownstreamPathTemplate": "/api/dashboard/latest-rates",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -126,7 +148,9 @@
     },
     {
       "UpstreamPathTemplate": "/gateway/dashboard/historical-rates/{currencyPair}",
-      "UpstreamHttpMethod": [ "Get" ],
+      "UpstreamHttpMethod": [
+        "Get"
+      ],
       "DownstreamPathTemplate": "/api/dashboard/historical-rates/{currencyPair}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -138,7 +162,9 @@
     },
     {
       "UpstreamPathTemplate": "/gateway/dashboard/historical-rates-daily/{currencyPair}",
-      "UpstreamHttpMethod": [ "Get" ],
+      "UpstreamHttpMethod": [
+        "Get"
+      ],
       "DownstreamPathTemplate": "/api/dashboard/historical-rates-daily/{currencyPair}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [

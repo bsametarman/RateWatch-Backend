@@ -36,7 +36,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-builder.Configuration.AddJsonFile("ocelot.json", optional: false, reloadOnChange: true);
+var ocelotConfigFile = builder.Environment.IsProduction() 
+    ? "ocelot.k8s.json" 
+    : "ocelot.json";
+
+builder.Configuration.AddJsonFile(ocelotConfigFile, optional: false, reloadOnChange: true);
 builder.Services.AddOcelot(builder.Configuration);
 
 var app = builder.Build();

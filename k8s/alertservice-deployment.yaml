@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: alertservice-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: alertservice
+  template:
+    metadata:
+      labels:
+        app: alertservice
+    spec:
+      containers:
+      - name: alertservice
+        image: ghcr.io/bsametarman/ratewatch-alertservice:latest
+        ports:
+        - containerPort: 80
+        env:
+        - name: ASPNETCORE_URLS
+          value: "http://+:80"
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "Production"
+        - name: ConnectionStrings__DefaultConnection
+          valueFrom:
+            secretKeyRef:
+              name: ratewatch-secrets
+              key: DB_CONNECTION_STRING
+        - name: AppSettings__Token
+          valueFrom:
+            secretKeyRef:
+              name: ratewatch-secrets
+              key: JWT_TOKEN_KEY   
+        - name: Redis__ConnectionString
+          value: "redis-cache-service:6379"
