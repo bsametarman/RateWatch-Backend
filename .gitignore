@@ -64,4 +64,4 @@ nunit-*.xml
 *.userosscache
 *.sln.docstates
 
-k8s/app-secrets.yaml
+k8s/setup/app-secrets.yaml
