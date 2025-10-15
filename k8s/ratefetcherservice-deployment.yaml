@@ -36,4 +36,4 @@ spec:
         - name: ExchangeRateApi__BaseCurrency
           value: "USD"
         - name: WorkerSettings__FetchIntervalInSeconds
-          value: 1800
+          value: "1800"
