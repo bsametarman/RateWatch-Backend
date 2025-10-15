@@ -12,6 +12,8 @@ spec:
       labels:
         app: analyticsservice
     spec:
+      imagePullSecrets:
+      - name: ghcr-secret
       containers:
       - name: analyticsservice
         image: ghcr.io/bsametarman/ratewatch-analyticsservice:latest

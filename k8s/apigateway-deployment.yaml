@@ -12,6 +12,8 @@ spec:
       labels:
         app: apigateway
     spec:
+      imagePullSecrets:
+      - name: ghcr-secret
       containers:
       - name: apigateway
         image: ghcr.io/bsametarman/ratewatch-apigateway:latest

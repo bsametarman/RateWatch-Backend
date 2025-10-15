@@ -12,6 +12,8 @@ spec:
       labels:
         app: thresholdruleservice
     spec:
+      imagePullSecrets:
+      - name: ghcr-secret
       containers:
       - name: thresholdruleservice
         image: ghcr.io/bsametarman/ratewatch-thresholdruleservice:latest

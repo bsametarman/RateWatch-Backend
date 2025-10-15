@@ -12,6 +12,8 @@ spec:
       labels:
         app: alertservice
     spec:
+      imagePullSecrets:
+      - name: ghcr-secret
       containers:
       - name: alertservice
         image: ghcr.io/bsametarman/ratewatch-alertservice:latest

@@ -12,6 +12,8 @@ spec:
       labels:
         app: dashboardservice
     spec:
+      imagePullSecrets:
+      - name: ghcr-secret
       containers:
       - name: dashboardservice
         image: ghcr.io/bsametarman/ratewatch-dashboardservice:latest

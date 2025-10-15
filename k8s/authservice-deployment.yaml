@@ -12,6 +12,8 @@ spec:
       labels:
         app: authservice
     spec:
+      imagePullSecrets:
+      - name: ghcr-secret
       containers:
       - name: authservice
         image: ghcr.io/bsametarman/ratewatch-authservice:latest

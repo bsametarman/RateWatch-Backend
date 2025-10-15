@@ -12,6 +12,8 @@ spec:
       labels:
         app: ratefetcherservice
     spec:
+      imagePullSecrets:
+      - name: ghcr-secret
       containers:
       - name: ratefetcherservice
         image: ghcr.io/bsametarman/ratewatch-ratefetcherservice:latest
