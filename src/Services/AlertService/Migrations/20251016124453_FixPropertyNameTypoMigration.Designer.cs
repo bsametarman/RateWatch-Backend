@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using RateWatch.AlertService.Infrastructure.Data;
@@ -11,9 +12,11 @@ using RateWatch.AlertService.Infrastructure.Data;
 namespace RateWatch.AlertService.Migrations
 {
     [DbContext(typeof(AlertContext))]
-    partial class AlertContextModelSnapshot : ModelSnapshot
+    [Migration("20251016124453_FixPropertyNameTypoMigration")]
+    partial class FixPropertyNameTypoMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
