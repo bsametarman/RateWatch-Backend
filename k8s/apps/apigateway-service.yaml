@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: apigateway-service
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   selector:
     app: apigateway
   ports:
