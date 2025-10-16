@@ -57,6 +57,20 @@ builder.Services.AddControllers();
 
 var app = builder.Build();
 
+try
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var dbContext = scope.ServiceProvider.GetRequiredService<AlertContext>();
+        await dbContext.Database.MigrateAsync();
+    }
+    app.Logger.LogInformation("Database migrations applied successfully for AuthService.");
+}
+catch (Exception ex)
+{
+    app.Logger.LogError(ex, "An error occurred while applying database migrations for AuthService.");
+}
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
