@@ -16,8 +16,8 @@ builder.Services.AddCors(options =>
                           policy.WithOrigins(
                                 "http://localhost:5173",
                                 "https://uminous-quokka-c43300.netlify.app",
-                                "https://www.ratewatch.com",
-                                "https://ratewatch.com"
+                                "https://www.ratewatch.live",
+                                "https://ratewatch.live"
                             )
                                 .AllowAnyHeader()
                                 .AllowAnyMethod();
