@@ -17,6 +17,7 @@ spec:
       containers:
       - name: authservice
         image: ghcr.io/bsametarman/ratewatch-authservice:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 80
         resources:

@@ -17,6 +17,7 @@ spec:
       containers:
       - name: analyticsservice
         image: ghcr.io/bsametarman/ratewatch-analyticsservice:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 80
         resources:

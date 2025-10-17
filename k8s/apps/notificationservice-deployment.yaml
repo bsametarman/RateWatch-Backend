@@ -17,6 +17,7 @@ spec:
       containers:
       - name: notificationservice
         image: ghcr.io/bsametarman/ratewatch-notificationservice:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 80
         resources:

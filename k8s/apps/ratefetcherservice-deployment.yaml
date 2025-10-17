@@ -19,6 +19,7 @@ spec:
       containers:
       - name: ratefetcherservice
         image: ghcr.io/bsametarman/ratewatch-ratefetcherservice:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 80
         resources:
