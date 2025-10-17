@@ -31,7 +31,7 @@ spec:
             name: notificationservice-service
             port:
               number: 80
-      - path: /
+      - path: /gateway
         pathType: Prefix
         backend:
           service:
