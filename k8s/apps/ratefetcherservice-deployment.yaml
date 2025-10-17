@@ -12,6 +12,8 @@ spec:
       labels:
         app: ratefetcherservice
     spec:
+      strategy:
+        type: Recreate
       imagePullSecrets:
       - name: ghcr-secret
       containers:
