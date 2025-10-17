@@ -48,4 +48,4 @@ spec:
         - name: ExchangeRateApi__BaseCurrency
           value: "USD"
         - name: WorkerSettings__FetchIntervalInSeconds
-          value: "60"
+          value: "1800"
