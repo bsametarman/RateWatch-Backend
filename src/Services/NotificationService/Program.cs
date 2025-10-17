@@ -5,8 +5,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton<WebSocketConnectionManager>();
 builder.Services.AddHostedService<NotificationWorker>();
 
-builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
-
 var app = builder.Build();
 
 app.UseWebSockets();
