@@ -7,6 +7,12 @@ metadata:
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
     nginx.ingress.kubernetes.ioio/backend-protocol: "HTTP"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "https://ratewatch.live, https://www.ratewatch.live"
+    nginx.ingress.kubernetes.io/cors-allow-methods: "GET, POST, PUT, DELETE, OPTIONS"
+    nginx.ingress.kubernetes.io/cors-allow-headers: "DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization"
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
 spec:
   ingressClassName: nginx
   tls:
@@ -17,6 +23,13 @@ spec:
   - host: api.ratewatch.live
     http:
       paths:
+      - path: /ws
+        pathType: Prefix
+        backend:
+          service:
+            name: notificationservice-service
+            port:
+              number: 80
       - path: /
         pathType: Prefix
         backend:

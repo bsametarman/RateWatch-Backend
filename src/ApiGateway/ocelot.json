@@ -5,7 +5,7 @@
       "UpstreamPathTemplate": "/gateway/auth/register",
       "UpstreamHttpMethod": [
         "Post",
-	"Options"
+        "Options"
       ],
       "DownstreamPathTemplate": "/api/auth/register",
       "DownstreamScheme": "http",
@@ -20,7 +20,7 @@
       "UpstreamPathTemplate": "/gateway/auth/login",
       "UpstreamHttpMethod": [
         "Post",
-	"Options"
+        "Options"
       ],
       "DownstreamPathTemplate": "/api/auth/login",
       "DownstreamScheme": "http",
@@ -36,7 +36,7 @@
       "UpstreamPathTemplate": "/gateway/user",
       "UpstreamHttpMethod": [
         "Get",
-	"Options"
+        "Options"
       ],
       "DownstreamPathTemplate": "/api/user",
       "DownstreamScheme": "http",
@@ -57,7 +57,7 @@
         "Get",
         "Put",
         "Delete",
-	"Options"
+        "Options"
       ],
       "DownstreamPathTemplate": "/api/user/{id}",
       "DownstreamScheme": "http",
@@ -76,7 +76,7 @@
       "UpstreamPathTemplate": "/gateway/user/internal/create",
       "UpstreamHttpMethod": [
         "Post",
-	"Options"
+        "Options"
       ],
       "DownstreamPathTemplate": "/api/user/internal/create",
       "DownstreamScheme": "http",
@@ -96,7 +96,7 @@
       "UpstreamPathTemplate": "/gateway/alert",
       "UpstreamHttpMethod": [
         "Post",
-	"Options"
+        "Options"
       ],
       "DownstreamPathTemplate": "/api/alert",
       "DownstreamScheme": "http",
@@ -113,7 +113,7 @@
         "Get",
         "Put",
         "Delete",
-	"Options"
+        "Options"
       ],
       "DownstreamPathTemplate": "/api/alert/{id}",
       "DownstreamScheme": "http",
@@ -128,7 +128,7 @@
       "UpstreamPathTemplate": "/gateway/alert/user-alerts",
       "UpstreamHttpMethod": [
         "Get",
-	"Options"
+        "Options"
       ],
       "DownstreamPathTemplate": "/api/alert/user-alerts",
       "DownstreamScheme": "http",
@@ -144,7 +144,7 @@
       "UpstreamPathTemplate": "/gateway/dashboard/latest-rates",
       "UpstreamHttpMethod": [
         "Get",
-	"Options"
+        "Options"
       ],
       "DownstreamPathTemplate": "/api/dashboard/latest-rates",
       "DownstreamScheme": "http",
@@ -159,7 +159,7 @@
       "UpstreamPathTemplate": "/gateway/dashboard/historical-rates/{currencyPair}",
       "UpstreamHttpMethod": [
         "Get",
-	"Options"
+        "Options"
       ],
       "DownstreamPathTemplate": "/api/dashboard/historical-rates/{currencyPair}",
       "DownstreamScheme": "http",
@@ -174,7 +174,7 @@
       "UpstreamPathTemplate": "/gateway/dashboard/historical-rates-daily/{currencyPair}",
       "UpstreamHttpMethod": [
         "Get",
-	"Options"
+        "Options"
       ],
       "DownstreamPathTemplate": "/api/dashboard/historical-rates-daily/{currencyPair}",
       "DownstreamScheme": "http",
