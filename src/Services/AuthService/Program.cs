@@ -1,7 +1,10 @@
+using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using RateWatch.AuthService.Application.DTOs;
 using RateWatch.AuthService.Application.Services;
+using RateWatch.AuthService.Application.Validators;
 using RateWatch.AuthService.Domain.Interfaces;
 using RateWatch.AuthService.Infrastructure.Data;
 using RateWatch.AuthService.Infrastructure.Messaging;
@@ -31,6 +34,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 builder.Services.AddAuthorization();
 
+builder.Services.AddScoped<IValidator<UserForRegisterDto>, UserForRegisterDtoValidator>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 builder.Services.AddSingleton<IMessageProducer, KafkaProducer>();

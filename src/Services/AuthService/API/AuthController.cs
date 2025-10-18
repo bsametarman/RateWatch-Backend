@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Mvc;
 using RateWatch.AuthService.Application.DTOs;
+using RateWatch.AuthService.Application.Responses;
 using RateWatch.AuthService.Application.Services;
 
 namespace RateWatch.AuthService.API
@@ -10,22 +11,38 @@ namespace RateWatch.AuthService.API
     public class AuthController : Controller
     {
         private readonly IAuthService _authService;
-        public AuthController(IAuthService authService)
+        private readonly IValidator<UserForRegisterDto> _validator;
+        public AuthController(IAuthService authService, IValidator<UserForRegisterDto> validator)
         {
             _authService = authService;
+            _validator = validator;
         }
 
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
         {
-            var result = await _authService.RegisterAsync(userForRegisterDto);
+            var validationResult = await _validator.ValidateAsync(userForRegisterDto);
 
-            if(!result.Success)
+            if (!validationResult.IsValid)
             {
-                return BadRequest(result);
+                var validationErrors = validationResult.Errors.GroupBy(e => e.PropertyName)
+                    .ToDictionary(
+                        f => f.Key,
+                        f => f.Select(e => e.ErrorMessage).ToArray()
+                    );
+                return BadRequest(ApiDataResponse<Dictionary<string, string[]>>.FailWithMessage(data: validationErrors, message: "Validation errors."));
             }
+            else
+            {
+                var result = await _authService.RegisterAsync(userForRegisterDto);
 
-            return Ok(result);
+                if (!result.Success)
+                {
+                    return BadRequest(result);
+                }
+
+                return Ok(result);
+            }
         }
 
         [HttpPost("login")]
