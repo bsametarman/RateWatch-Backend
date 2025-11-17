@@ -50,17 +50,14 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddRateLimiter(options =>
 {
-    options.AddFixedWindowLimiter(policyName: "auth_policy", limiterOptions =>
+    options.AddSlidingWindowLimiter(policyName: "auth_policy", limiterOptions =>
     {
         limiterOptions.PermitLimit = 10;
         limiterOptions.Window = TimeSpan.FromMinutes(30);
         limiterOptions.QueueLimit = 0;
-        limiterOptions.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
     });
     options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
 });
-
-var app = builder.Build();
 
 builder.Services.Configure<ForwardedHeadersOptions>(options =>
 {
@@ -68,6 +65,8 @@ builder.Services.Configure<ForwardedHeadersOptions>(options =>
     options.KnownProxies.Clear();
     options.KnownNetworks.Clear();
 });
+
+var app = builder.Build();
 
 try
 {
