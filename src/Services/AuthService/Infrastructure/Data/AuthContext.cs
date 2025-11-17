@@ -10,5 +10,6 @@ namespace RateWatch.AuthService.Infrastructure.Data
         }
 
         public DbSet<AuthUser> AuthUsers { get; set; }
+        public DbSet<AuditLog> AuditLogs { get; set; }
     }
 }
