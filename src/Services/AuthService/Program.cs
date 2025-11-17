@@ -50,7 +50,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddRateLimiter(options =>
 {
-    options.AddSlidingWindowLimiter(policyName: "auth_policy", limiterOptions =>
+    options.AddFixedWindowLimiter(policyName: "auth_policy", limiterOptions =>
     {
         limiterOptions.PermitLimit = 10;
         limiterOptions.Window = TimeSpan.FromMinutes(30);
