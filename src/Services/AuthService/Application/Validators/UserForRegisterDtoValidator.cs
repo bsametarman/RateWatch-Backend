@@ -9,7 +9,8 @@ namespace RateWatch.AuthService.Application.Validators
         {
             RuleFor(user => user.Email)
                 .NotEmpty().WithMessage("Email address is required.")
-                .EmailAddress().WithMessage("Please enter a valid email address.");
+                .EmailAddress().WithMessage("Please enter a valid email address.")
+                .Matches(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$").WithMessage("Email address must contain a valid domain (e.g., .com).");
 
             RuleFor(user => user.Password)
                 .NotEmpty().WithMessage("Enter password.")
